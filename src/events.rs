@@ -1,5 +1,4 @@
 use serenity::model::{prelude::*};
-use serenity::CacheAndHttp;
 use serenity::prelude::Context;
 use crate::Handler;
 
