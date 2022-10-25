@@ -28,6 +28,11 @@ async fn main() {
     let intents = GatewayIntents::non_privileged() | GatewayIntents::GUILD_MEMBERS;
     let db = mongo::connect().await;
 
-    let mut client = Client::builder(&token, intents).event_handler(Handler { db }).framework(StandardFramework::new().configure(|c| c.with_whitespace(true).prefix('~'))).await.expect("Error creating client");
+    let mut client = Client::builder(&token, intents)
+        .event_handler(Handler { db })
+        .framework(StandardFramework::new()
+        .configure(|c| c.with_whitespace(true).prefix('~')))
+        .await
+        .expect("Error creating client");
     client.start().await.expect("Error starting client");
 }
