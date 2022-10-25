@@ -44,7 +44,10 @@ impl Handler {
                     Some(user) => {
                         for role_id in user.roles {
                             println!("User {} joined guild. Adding role {}", member.user.name, role_id);
-                            member.clone().add_role(&ctx.http, RoleId::from(role_id.parse::<u64>().unwrap())).await.unwrap();
+                            match member.clone().add_role(&ctx.http, RoleId::from(role_id.parse::<u64>().unwrap())).await {
+                                Ok(_) => {},
+                                Err(e) => println!("Error adding role: {}", e)
+                            }
                         }
                     },
                     None => {}
